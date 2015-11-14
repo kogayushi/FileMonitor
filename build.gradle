@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+def defaultEncoding = 'UTF-8'
+tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+tasks.withType(GroovyCompile).each { it.groovyOptions.encoding = defaultEncoding }
+
+mainClassName = "sample.file.monitor.entry.Main"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'commons-io:commons-io:latest.release',
+            'log4j:log4j:latest.release',
+            'org.apache.commons:commons-vfs2:latest.release'
+
+    testCompile "junit:junit:4.11"
+}
