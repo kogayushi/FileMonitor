@@ -1,3 +1,4 @@
 .gradle/
 private/
 build/
+.nb-gradle-properties
