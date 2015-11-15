@@ -44,6 +44,7 @@ public class ResourceMonitor {
         }
         // Generate Monitor. Interval is milli seconds.
         FileAlterationMonitor monitor = new FileAlterationMonitor(refreshDelay);
+
         // Generate Observer.Set monitoring directory.
         final File dir = new File(monitoringDirectory);
         FileFilter filter = new FileFilter() {
@@ -52,19 +53,18 @@ public class ResourceMonitor {
                 return pathname.getName().equals(MONITORING_FILE);
             }
         };
-
         FileAlterationObserver observer = new FileAlterationObserver(dir, filter);
 
+        // Generate and register Lister to Observer
         ResourceListner listener = new ResourceListner();
-        // Register Lister to Observer
         observer.addListener(listener);
 
         // Register Observer to Monitor
         monitor.addObserver(observer);
 
-        // start Monitor
+        // Start Monitor
         monitor.start();
-        log.info(this.getClass().getName() + " started monitoring");
+        log.info(this.getClass().getSimpleName() + " started monitoring");
     }
 
 }
