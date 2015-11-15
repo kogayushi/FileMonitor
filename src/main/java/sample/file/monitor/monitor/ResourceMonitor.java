@@ -5,10 +5,13 @@ import java.io.FileFilter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.apache.log4j.Logger;
 import sample.file.monitor.listner.ResourceListner;
+import sample.file.monitor.resource.Resource;
 
 /**
  *
@@ -37,7 +40,7 @@ public class ResourceMonitor {
     private ResourceMonitor() {
     }
 
-    public void start() throws Exception {
+    public void start() throws ConfigurationException, MalformedURLException, Exception {
         // Guard Clause
         if (monitoringDirectory == null) {
             throw new IllegalStateException("Please set monitoring directory");
@@ -63,8 +66,8 @@ public class ResourceMonitor {
         monitor.addObserver(observer);
 
         // Start Monitor
+        Resource.load(new URL(monitoringDirectory.toURL(), MONITORING_FILE));
         monitor.start();
         log.info(this.getClass().getSimpleName() + " started monitoring");
     }
-
 }
