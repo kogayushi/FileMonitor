@@ -5,9 +5,7 @@
  */
 package sample.file.monitor.resource;
 
-import java.io.File;
 import java.net.URL;
-import java.util.logging.Level;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
@@ -29,7 +27,7 @@ public class Resource {
         return resource;
     }
 
-    public static synchronized void load(URL resourceFile) throws ConfigurationException{
+    public static void load(URL resourceFile) throws ConfigurationException{
         try {
             configuration = new PropertiesConfiguration(resourceFile);
         } catch (ConfigurationException ex) {

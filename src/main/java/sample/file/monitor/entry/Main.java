@@ -27,7 +27,7 @@ public class Main {
                 Thread.sleep(50);
             }
         } catch (Exception ex) {
-            log.error(ex);
+            log.error("something wrong",ex);
         }
     }
 
